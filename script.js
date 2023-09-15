@@ -80,6 +80,7 @@ function update() {
   if(score1 == 7){
     alert("Game over!");
     score1=0;
+    score2=0;
     dotWidth=0;
   }
   document.getElementById("score1").innerHTML=score1;
