@@ -14,12 +14,14 @@ const btn2 = document.getElementById('button2');
 let paddle1PosX = 150;
 let paddle2PosX= 150;
 let ballPosX = 150;
-let ballPosY = 250;
+let ballPosY = 20;
 let ballSpeedX = 3;
-let  ballSpeedY = 3;
-let paddle1SpeedX = 3;
-let paddle2SpeedX = 6;
+let ballSpeedY = 3;
+let paddleSpeedX = 3;
+
 let score1 = 0;
+let score2 = 0;
+
 let dotPosX = 0;
 let dotWidth =0;
 let ready= false;
@@ -41,39 +43,56 @@ function update() {
   ballPosX += ballSpeedX;
   ballPosY += ballSpeedY;
 
-//run score1
-if (ready==true){
-  if (ballPosY >= 480 &&( ballPosX>(paddle2PosX+50))){
-    ballPosX = paddle1PosX;
-    ballPosY = 0;
-    ballSpeedX = paddle1SpeedX= paddle2SpeedX=  3;
+//run score
+// if (ready==true){
+  if (ballPosY >= 480 &&( ballPosX>(paddle2PosX+70))){
+    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosY = 20;
+    ballSpeedX = paddleSpeedX =3;
     ballSpeedY = 3;
     score1+=1;
     dotWidth+=50;
   }
-  if(ballPosY >= 480 &&( ballPosX<(paddle2PosX))){
-    ballPosX = paddle1PosX;
-    ballPosY = 0;
-    ballSpeedX = paddle1SpeedX= paddle2SpeedX= 3;
+  if(ballPosY >= 480 &&( ballPosX<(paddle2PosX-20))){
+    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosY = 20;
+    ballSpeedX = paddleSpeedX =3;
     ballSpeedY = 3;
     score1+=1;
     dotWidth+=50;
   }
+//
+  if (ballPosY <= 20 &&( ballPosX>(paddle1PosX+70))){
+    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosY = 480;
+    ballSpeedX = paddleSpeedX= 3;
+    ballSpeedY = -3;
+    score2+=1;
+  }
+  if(ballPosY <= 20  &&( ballPosX<(paddle1PosX-20))){
+    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosY = 480;
+    ballSpeedX = paddleSpeedX= 3;
+    ballSpeedY = -3;
+    score2+=1;
+  }
+
   if(score1 == 7){
     alert("Game over!");
     score1=0;
     dotWidth=0;
   }
   document.getElementById("score1").innerHTML=score1;
-}
+  document.getElementById("score2").innerHTML=score2;
+//}
 //paddle2 but auto
 if (ready == false){
   if (ballPosY >= 50 && ballSpeedY > 0){
-    if(paddle2PosX > ballPosX){
-      paddle2PosX-=paddle1SpeedX;
+    if(paddle2PosX+25 > ballPosX){
+      paddle2PosX-=paddleSpeedX;
     }
-    else if(paddle2PosX < ballPosX){
-      paddle2PosX+=paddle1SpeedX;
+    else if(paddle2PosX+25 < ballPosX){
+      paddle2PosX+=paddleSpeedX;
     }
     if(paddle2PosX < 0){
       paddle2PosX = 0;
@@ -86,23 +105,25 @@ if (ready == false){
 }
 //paddle1 run
   if (ballPosY <= 450 && ballSpeedY < 0){
-    if(paddle1PosX > ballPosX){
-      paddle1PosX-=paddle1SpeedX;
+    if(paddle1PosX+25 > ballPosX){
+      paddle1PosX-=paddleSpeedX;
     }
-    else if(paddle1PosX < ballPosX){
-      paddle1PosX+=paddle1SpeedX;
+    else if(paddle1PosX+25 < ballPosX){
+      paddle1PosX+=paddleSpeedX;
+    }
+    if (paddle1PosX >= 250){
+      paddle1PosX = 250;
+    }
+    if (paddle1PosX <= 0){
+      paddle1PosX = 0;
     }
   }
   
 //ball + speed
-  if (paddle1PosX >= 250){
-    paddle1PosX = 250;
-  }
 
   if (ballPosX >= 280 || ballPosX <= 0) {
     ballSpeedX *= -1.007;
-    paddle1SpeedX *= 1.007;
-    paddle2SpeedX *= 1.007;
+    paddleSpeedX *= 1.006;
   }
 
   if (ballPosY >= 480 || ballPosY <= 0) {
