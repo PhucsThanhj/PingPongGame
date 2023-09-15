@@ -46,7 +46,7 @@ function update() {
 //run score
 // if (ready==true){
   if (ballPosY >= 480 &&( ballPosX>(paddle2PosX+70))){
-    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosX = paddle1PosX;
     ballPosY = 20;
     ballSpeedX = paddleSpeedX =3;
     ballSpeedY = 3;
@@ -54,7 +54,7 @@ function update() {
     dotWidth+=50;
   }
   if(ballPosY >= 480 &&( ballPosX<(paddle2PosX-20))){
-    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosX = paddle1PosX;
     ballPosY = 20;
     ballSpeedX = paddleSpeedX =3;
     ballSpeedY = 3;
@@ -63,14 +63,14 @@ function update() {
   }
 //
   if (ballPosY <= 20 &&( ballPosX>(paddle1PosX+70))){
-    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosX = paddle2PosX;
     ballPosY = 480;
     ballSpeedX = paddleSpeedX= 3;
     ballSpeedY = -3;
     score2+=1;
   }
   if(ballPosY <= 20  &&( ballPosX<(paddle1PosX-20))){
-    paddle1PosX = paddle2PosX = ballPosX = 150;
+    ballPosX = paddle2PosX;
     ballPosY = 480;
     ballSpeedX = paddleSpeedX= 3;
     ballSpeedY = -3;
